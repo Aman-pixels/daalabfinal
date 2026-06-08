@@ -2,22 +2,28 @@ import java.util.*;
 
 public class subset {
 
-    static boolean subsetSum(int arr[],
-                             int n,
-                             int sum) {
+    static boolean found = false;
 
-        if (sum == 0)
-            return true;
+    static void findSubsets(int[] arr, int index, int target,
+                            ArrayList<Integer> subset) {
 
-        if (n == 0)
-            return false;
+        if (target == 0) {
+            System.out.println(subset);
+            found = true;
+            return;
+        }
 
-        if (arr[n - 1] > sum)
-            return subsetSum(arr, n - 1, sum);
+        if (index == arr.length || target < 0)
+            return;
 
-        return subsetSum(arr, n - 1, sum)
-                || subsetSum(arr, n - 1,
-                             sum - arr[n - 1]);
+        subset.add(arr[index]);
+        findSubsets(arr, index + 1,
+                    target - arr[index], subset);
+
+        subset.remove(subset.size() - 1);
+
+        findSubsets(arr, index + 1,
+                    target, subset);
     }
 
     public static void main(String[] args) {
@@ -35,11 +41,14 @@ public class subset {
             arr[i] = sc.nextInt();
 
         System.out.print("Enter target sum: ");
-        int sum = sc.nextInt();
+        int target = sc.nextInt();
 
-        if (subsetSum(arr, n, sum))
-            System.out.println("Subset Exists");
-        else
-            System.out.println("Subset Does Not Exist");
+        System.out.println("Possible Subsets:");
+
+        findSubsets(arr, 0, target,
+                    new ArrayList<Integer>());
+
+        if (!found)
+            System.out.println("No subset found");
     }
 }
