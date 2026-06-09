@@ -6,10 +6,13 @@ kmp
 knapsack1
 kruskal
 matching
+matching1
 mergesort
 nqueen
 prims
 quicksort
 subset
 topological
+topological1
 tsp1
+horspool1

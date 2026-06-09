@@ -2,35 +2,34 @@ import java.util.*;
 
 public class dijkstra1 {
 
-    static int minDistance(int[] dist, boolean[] visited, int V) {
+    int minDistance(int dist[], boolean visited[], int V) {
+
         int min = Integer.MAX_VALUE;
         int minIndex = -1;
 
-        for (int i = 0; i < V; i++) {
-            if (!visited[i] && dist[i] < min) {
-                min = dist[i];
-                minIndex = i;
+        for (int v = 0; v < V; v++) {
+
+            if (!visited[v] && dist[v] < min) {
+                min = dist[v];
+                minIndex = v;
             }
         }
 
         return minIndex;
     }
 
-    static void dijkstra(int[][] graph, int source, int V) {
+    void dijkstra(int graph[][], int src, int V) {
 
-        int[] dist = new int[V];
-        boolean[] visited = new boolean[V];
+        int dist[] = new int[V];
+        boolean visited[] = new boolean[V];
 
         Arrays.fill(dist, Integer.MAX_VALUE);
 
-        dist[source] = 0;
+        dist[src] = 0;
 
         for (int count = 0; count < V - 1; count++) {
 
             int u = minDistance(dist, visited, V);
-
-            if (u == -1)
-                break;
 
             visited[u] = true;
 
@@ -46,10 +45,10 @@ public class dijkstra1 {
             }
         }
 
-        System.out.println("\nShortest Distances from Source " + source + ":");
+        System.out.println("\nShortest distances from Source " + src + ":");
 
         for (int i = 0; i < V; i++) {
-            System.out.println(source + " -> " + i + " = " + dist[i]);
+            System.out.println(src + " -> " + i + " = " + dist[i]);
         }
     }
 
@@ -60,9 +59,9 @@ public class dijkstra1 {
         System.out.print("Enter number of vertices: ");
         int V = sc.nextInt();
 
-        int[][] graph = new int[V][V];
+        int graph[][] = new int[V][V];
 
-        System.out.println("Enter adjacency matrix:");
+        System.out.println("Enter Adjacency Matrix:");
 
         for (int i = 0; i < V; i++) {
             for (int j = 0; j < V; j++) {
@@ -70,9 +69,13 @@ public class dijkstra1 {
             }
         }
 
-        System.out.print("Enter source vertex: ");
-        int source = sc.nextInt();
+        System.out.print("Enter Source Vertex: ");
+        int src = sc.nextInt();
 
-        dijkstra(graph, source, V);
+        dijkstra1 obj = new dijkstra1();
+
+        obj.dijkstra(graph, src, V);
+
+        sc.close();
     }
 }

@@ -12,8 +12,7 @@ public class tsp1 {
                     int cost,
                     int start) {
 
-        if (count == N &&
-            graph[currPos][start] > 0) {
+        if (count == N && graph[currPos][start] > 0) {
 
             minCost = Math.min(
                     minCost,
@@ -52,9 +51,11 @@ public class tsp1 {
 
         System.out.println("Enter cost matrix:");
 
-        for (int i = 0; i < N; i++)
-            for (int j = 0; j < N; j++)
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
                 graph[i][j] = sc.nextInt();
+            }
+        }
 
         boolean[] visited = new boolean[N];
 
@@ -68,5 +69,7 @@ public class tsp1 {
             0);
 
         System.out.println("Minimum Cost = " + minCost);
+
+        sc.close();
     }
 }
